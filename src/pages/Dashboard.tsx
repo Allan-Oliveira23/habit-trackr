@@ -1,39 +1,33 @@
 import { Plus } from 'lucide-react'
-import { useMemo, useState } from 'react'
 import GoalSummary from '../components/dashboard/GoalSummary'
+import HabitProgressList from '../components/dashboard/HabitProgressList'
 import HabitTable from '../components/dashboard/HabitTable'
 import MonthSelector from '../components/dashboard/MonthSelector'
 import ProgressChart from '../components/dashboard/ProgressChart'
+import WeeklySummary from '../components/dashboard/WeeklySummary'
 import Button from '../components/ui/Button'
 import Card from '../components/ui/Card'
 import ProgressBar from '../components/ui/ProgressBar'
-import Select from '../components/ui/Select'
 import { useHabitDialogs } from '../hooks/useHabitDialogs'
 import { useHabits } from '../hooks/useHabits'
 import { useMonthData } from '../hooks/useMonthData'
 import {
   calculateDailyProgress,
   calculateDaysGoalMet,
-  calculateGoalProgress,
-  calculateHabitProgress,
   calculateCompletedCount,
   calculateIncompleteCount,
   calculateMonthlyProgress,
   calculatePossibleCount,
-  calculateWeeklyProgress,
 } from '../utils/calculations'
-import { dateKey, getWeeks } from '../utils/calendar'
+import { dateKey } from '../utils/calendar'
 import { formatPercent } from '../utils/formatters'
 
 export default function Dashboard() {
   const { state, dispatch } = useHabits()
   const { habits } = state
   const { openCreate, openEdit, openDelete, dialogs } = useHabitDialogs()
-  const { days, dates, done } = useMonthData()
-  const [week, setWeek] = useState('all')
+  const { days, dates, weeks, done } = useMonthData()
 
-  const weeks = useMemo(() => getWeeks(days).map((w) => w.map(dateKey)), [days])
-  const selectedWeek = week !== 'all' && weeks[Number(week)] ? week : 'all'
   const activeHabits = habits.filter((h) => h.active)
   const completed = calculateCompletedCount(habits, done, dates)
   const possible = calculatePossibleCount(habits, dates)
@@ -109,50 +103,8 @@ export default function Dashboard() {
           </Card>
 
           <div className="grid gap-4 md:grid-cols-2">
-            <Card title="Resumo semanal">
-              <div className="mb-3">
-                <Select
-                  label="Semana:"
-                  value={selectedWeek}
-                  onChange={setWeek}
-                  options={[{ value: 'all', label: 'Todas' }, ...weeks.map((_, i) => ({ value: String(i), label: `Semana ${i + 1}` }))]}
-                />
-              </div>
-              <ul className="space-y-3">
-                {weeks.map((w, i) => {
-                  if (selectedWeek !== 'all' && selectedWeek !== String(i)) return null
-                  const p = calculateWeeklyProgress(habits, done, w)
-                  return (
-                    <li key={i}>
-                      <div className="mb-1 flex justify-between text-sm"><span>Semana {i + 1}</span><span>{formatPercent(p)}</span></div>
-                      <ProgressBar value={p} label={`Progresso da semana ${i + 1}`} />
-                    </li>
-                  )
-                })}
-              </ul>
-            </Card>
-            <Card title="Progresso por hábito e metas">
-              <ul className="space-y-3">
-                {activeHabits.map((h) => {
-                  const p = calculateHabitProgress(h.id, done, dates)
-                  const goalPct = calculateGoalProgress(h, p.completed)
-                  return (
-                    <li key={h.id}>
-                      <div className="mb-1 flex justify-between text-sm">
-                        <span>{h.icon} {h.name}</span>
-                        <span className="text-muted">{p.completed} / {p.total} dias · {formatPercent(p.percent)}</span>
-                      </div>
-                      <ProgressBar value={p.percent} label={`Progresso de ${h.name}`} />
-                      {h.goal && (
-                        <p className={`mt-1 text-xs ${goalPct >= 100 ? 'text-ok' : 'text-muted'}`}>
-                          Meta: {p.completed} / {h.goal} dias{goalPct >= 100 ? ' — atingida' : ` (${formatPercent(goalPct)})`}
-                        </p>
-                      )}
-                    </li>
-                  )
-                })}
-              </ul>
-            </Card>
+            <WeeklySummary habits={habits} done={done} weeks={weeks} />
+            <HabitProgressList habits={habits} dates={dates} done={done} />
           </div>
         </>
       )}

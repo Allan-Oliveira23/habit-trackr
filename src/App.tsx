@@ -4,6 +4,7 @@ import Topbar from './components/layout/Topbar'
 import Card from './components/ui/Card'
 import Dashboard from './pages/Dashboard'
 import Habits from './pages/Habits'
+import Statistics from './pages/Statistics'
 import type { View } from './types/navigation'
 
 export default function App() {
@@ -19,6 +20,8 @@ export default function App() {
             <Dashboard />
           ) : view === 'habits' ? (
             <Habits />
+          ) : view === 'statistics' ? (
+            <Statistics />
           ) : (
             <Card>
               <p className="text-sm text-muted">Esta página ainda não foi implementada.</p>

@@ -46,3 +46,19 @@ export const calculateDailyGoalProgress = (completedInDay: number, dailyGoal: nu
 /** Quantidade de dias em que a meta diária foi atingida. */
 export const calculateDaysGoalMet = (habits: Habit[], done: CompletionSet, dates: string[], dailyGoal: number): number =>
   dailyGoal > 0 ? dates.filter((d) => calculateCompletedCount(habits, done, [d]) >= dailyGoal).length : 0
+
+/** Total de conclusões registradas no histórico (hábitos existentes). */
+export const calculateTotalCompletions = (done: CompletionSet): number => done.size
+
+/** Dias com mais conclusões, ordenados por progresso (empate: data mais antiga). Ignora dias sem conclusões. */
+export function calculateBestDays(habits: Habit[], done: CompletionSet, dates: string[], limit = 3) {
+  return dates
+    .map((date) => ({
+      date,
+      completed: calculateCompletedCount(habits, done, [date]),
+      percent: calculateDailyProgress(habits, done, date),
+    }))
+    .filter((d) => d.completed > 0)
+    .sort((a, b) => b.percent - a.percent || a.date.localeCompare(b.date))
+    .slice(0, limit)
+}

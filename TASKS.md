@@ -623,11 +623,11 @@ Criar `/habits`.
 
 Criar `/statistics`.
 
-- [ ] progresso mensal;
-- [ ] progresso semanal;
-- [ ] progresso por hábito;
-- [ ] melhores dias;
-- [ ] total de conclusões.
+- [x] progresso mensal;
+- [x] progresso semanal;
+- [x] progresso por hábito;
+- [x] melhores dias;
+- [x] total de conclusões.
 
 Evitar adicionar estatísticas que não possam ser calculadas corretamente com os dados disponíveis.
 
