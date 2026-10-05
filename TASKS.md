@@ -155,16 +155,16 @@ feat: define habit domain types
 - [x] Criar `App`
 - [x] Criar layout principal
 - [x] Criar área de conteúdo
-- [ ] Criar navegação
+- [x] Criar navegação
 
 ---
 
 ## 3.2 Sidebar
 
-- [ ] Dashboard
-- [ ] Hábitos
-- [ ] Estatísticas
-- [ ] Configurações
+- [x] Dashboard
+- [x] Hábitos
+- [x] Estatísticas
+- [x] Configurações
 
 No mobile, a sidebar deve se adaptar.
 
