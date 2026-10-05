@@ -421,6 +421,8 @@ recarregar página
 estado continua correto
 ```
 
+- [x] Verificado com teste de recarga simulada (jsdom); falta conferir em navegador real.
+
 **Commit:**
 
 ```text
