@@ -58,15 +58,14 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-4">
-      <header className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-xl font-semibold">Habit Tracker</h1>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <MonthSelector />
         <div className="flex flex-wrap items-center gap-3">
-          <MonthSelector />
           <Button variant="primary" onClick={() => setModal({ kind: 'form' })}>
             <Plus size={16} /> Novo hábito
           </Button>
         </div>
-      </header>
+      </div>
 
       {habits.length === 0 ? (
         <Card>

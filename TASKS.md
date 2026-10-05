@@ -172,9 +172,9 @@ No mobile, a sidebar deve se adaptar.
 
 ## 3.3 Topbar
 
-- [ ] Título da página
-- [ ] Navegação básica
-- [ ] Espaçamento responsivo
+- [x] Título da página
+- [x] Navegação básica
+- [x] Espaçamento responsivo
 
 ---
 
