@@ -183,9 +183,9 @@ No mobile, a sidebar deve se adaptar.
 - [x] Button
 - [x] Card
 - [x] Modal
-- [ ] Select
+- [x] Select
 - [x] ProgressBar
-- [ ] Tooltip
+- [x] Tooltip
 
 Criar somente componentes que realmente serão utilizados.
 

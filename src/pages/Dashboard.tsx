@@ -8,6 +8,7 @@ import Button from '../components/ui/Button'
 import Card from '../components/ui/Card'
 import Modal from '../components/ui/Modal'
 import ProgressBar from '../components/ui/ProgressBar'
+import Select from '../components/ui/Select'
 import { useHabits } from '../hooks/useHabits'
 import type { Habit, HabitInput } from '../types/habit'
 import {
@@ -31,6 +32,7 @@ export default function Dashboard() {
   const { state, dispatch } = useHabits()
   const { habits, completions, year, month } = state
   const [modal, setModal] = useState<ModalState>(null)
+  const [week, setWeek] = useState('all')
 
   const days = useMemo(() => getDaysOfMonth(year, month), [year, month])
   const dates = useMemo(() => days.map(dateKey), [days])
@@ -40,6 +42,7 @@ export default function Dashboard() {
     [completions],
   )
 
+  const selectedWeek = week !== 'all' && weeks[Number(week)] ? week : 'all'
   const activeHabits = habits.filter((h) => h.active)
   const completed = calculateCompletedCount(habits, done, dates)
   const possible = calculatePossibleCount(habits, dates)
@@ -115,8 +118,17 @@ export default function Dashboard() {
 
           <div className="grid gap-4 md:grid-cols-2">
             <Card title="Resumo semanal">
+              <div className="mb-3">
+                <Select
+                  label="Semana:"
+                  value={selectedWeek}
+                  onChange={setWeek}
+                  options={[{ value: 'all', label: 'Todas' }, ...weeks.map((_, i) => ({ value: String(i), label: `Semana ${i + 1}` }))]}
+                />
+              </div>
               <ul className="space-y-3">
                 {weeks.map((w, i) => {
+                  if (selectedWeek !== 'all' && selectedWeek !== String(i)) return null
                   const p = calculateWeeklyProgress(habits, done, w)
                   return (
                     <li key={i}>
