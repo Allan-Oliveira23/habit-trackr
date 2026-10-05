@@ -1,6 +1,7 @@
 import { Plus } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import HabitForm from '../components/habits/HabitForm'
+import GoalSummary from '../components/dashboard/GoalSummary'
 import HabitTable from '../components/dashboard/HabitTable'
 import MonthSelector from '../components/dashboard/MonthSelector'
 import ProgressChart from '../components/dashboard/ProgressChart'
@@ -13,6 +14,7 @@ import { useHabits } from '../hooks/useHabits'
 import type { Habit, HabitInput } from '../types/habit'
 import {
   calculateDailyProgress,
+  calculateDaysGoalMet,
   calculateGoalProgress,
   calculateHabitProgress,
   calculateCompletedCount,
@@ -95,6 +97,17 @@ export default function Dashboard() {
               </dl>
             </Card>
           </div>
+
+          <Card title="Meta diária">
+            <GoalSummary
+              goal={state.settings.dailyGoal}
+              maxGoal={activeHabits.length}
+              todayCompleted={dates.includes(dateKey(new Date())) ? calculateCompletedCount(habits, done, [dateKey(new Date())]) : null}
+              daysMet={state.settings.dailyGoal ? calculateDaysGoalMet(habits, done, dates, state.settings.dailyGoal) : 0}
+              totalDays={dates.length}
+              onChange={(goal) => dispatch({ type: 'SET_DAILY_GOAL', payload: goal })}
+            />
+          </Card>
 
           <Card title="Hábitos">
             <HabitTable

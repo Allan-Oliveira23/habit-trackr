@@ -38,3 +38,11 @@ export function calculateHabitProgress(habitId: string, done: CompletionSet, dat
 
 export const calculateGoalProgress = (habit: Habit, completedDays: number): number =>
   habit.goal ? toPercent(completedDays, habit.goal) : 0
+
+/** Progresso de um dia em relação à meta diária (nº de hábitos a concluir por dia). */
+export const calculateDailyGoalProgress = (completedInDay: number, dailyGoal: number): number =>
+  toPercent(completedInDay, dailyGoal)
+
+/** Quantidade de dias em que a meta diária foi atingida. */
+export const calculateDaysGoalMet = (habits: Habit[], done: CompletionSet, dates: string[], dailyGoal: number): number =>
+  dailyGoal > 0 ? dates.filter((d) => calculateCompletedCount(habits, done, [d]) >= dailyGoal).length : 0

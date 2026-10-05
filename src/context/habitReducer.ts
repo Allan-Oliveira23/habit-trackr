@@ -10,6 +10,7 @@ export type HabitAction =
   | { type: 'TOGGLE_COMPLETION'; payload: { habitId: string; date: string } }
   | { type: 'SET_MONTH'; payload: number }
   | { type: 'SET_YEAR'; payload: number }
+  | { type: 'SET_DAILY_GOAL'; payload: number | undefined }
   | { type: 'RESET_DATA' }
 
 const currentPeriod = () => ({ year: new Date().getFullYear(), month: new Date().getMonth() })
@@ -45,6 +46,8 @@ export function habitReducer(state: HabitState, action: HabitAction): HabitState
       return { ...state, month: action.payload }
     case 'SET_YEAR':
       return { ...state, year: action.payload }
+    case 'SET_DAILY_GOAL':
+      return { ...state, settings: { ...state.settings, dailyGoal: action.payload } }
     case 'RESET_DATA':
       return { habits: createSeedHabits(), completions: [], settings: {}, ...currentPeriod() }
   }

@@ -405,7 +405,7 @@ Salvar quando:
 - [x] hábito é editado;
 - [x] hábito é removido;
 - [x] conclusão é alterada;
-- [ ] configuração relevante muda.
+- [x] configuração relevante muda.
 
 ---
 
@@ -503,7 +503,7 @@ Mostrar:
 - [x] progresso;
 - [x] concluídos;
 - [x] incompletos;
-- [ ] objetivo diário.
+- [x] objetivo diário.
 
 ---
 
@@ -585,9 +585,9 @@ feat: add progress charts
 
 ## 12.1 Meta diária
 
-- [ ] configurar objetivo;
-- [ ] mostrar objetivo;
-- [ ] calcular progresso em relação à meta.
+- [x] configurar objetivo;
+- [x] mostrar objetivo;
+- [x] calcular progresso em relação à meta.
 
 ---
 
