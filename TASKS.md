@@ -50,9 +50,9 @@ chore: initialize repository
 
 ## 0.2 Criar projeto Vite
 
-- [ ] Criar projeto React + TypeScript + Vite
-- [ ] Confirmar execução local
-- [ ] Confirmar build
+- [x] Criar projeto React + TypeScript + Vite
+- [x] Confirmar execução local
+- [x] Confirmar build
 
 **Critério:**
 
@@ -75,10 +75,10 @@ chore: setup vite react typescript
 
 ## 1.1 Instalar dependências principais
 
-- [ ] Tailwind CSS
-- [ ] Lucide React
-- [ ] Recharts
-- [ ] date-fns
+- [x] Tailwind CSS
+- [x] Lucide React
+- [x] Recharts
+- [x] date-fns
 
 Não instalar bibliotecas adicionais sem necessidade.
 
@@ -92,13 +92,13 @@ chore: add frontend dependencies
 
 ## 1.2 Configurar tema
 
-- [ ] Criar tema escuro
-- [ ] Definir tokens/classes visuais
-- [ ] Configurar fundo
-- [ ] Configurar cards
-- [ ] Configurar bordas
-- [ ] Configurar tipografia
-- [ ] Configurar estados de sucesso/erro
+- [x] Criar tema escuro
+- [x] Definir tokens/classes visuais
+- [x] Configurar fundo
+- [x] Configurar cards
+- [x] Configurar bordas
+- [x] Configurar tipografia
+- [x] Configurar estados de sucesso/erro
 
 **Critério:**
 
@@ -116,14 +116,14 @@ style: establish dark dashboard theme
 
 ## 2.1 Criar estrutura de pastas
 
-- [ ] `components`
-- [ ] `pages`
-- [ ] `hooks`
-- [ ] `context`
-- [ ] `services`
-- [ ] `utils`
-- [ ] `types`
-- [ ] `data`
+- [x] `components`
+- [x] `pages`
+- [x] `hooks`
+- [x] `context`
+- [x] `services`
+- [x] `utils`
+- [x] `types`
+- [x] `data`
 
 Não criar arquivos vazios sem necessidade.
 
@@ -131,10 +131,10 @@ Não criar arquivos vazios sem necessidade.
 
 ## 2.2 Criar tipos
 
-- [ ] `Habit`
-- [ ] `HabitCompletion`
-- [ ] `AppSettings`
-- [ ] `HabitState`
+- [x] `Habit`
+- [x] `HabitCompletion`
+- [x] `AppSettings`
+- [x] `HabitState`
 
 **Critério:**
 
@@ -152,9 +152,9 @@ feat: define habit domain types
 
 ## 3.1 App shell
 
-- [ ] Criar `App`
-- [ ] Criar layout principal
-- [ ] Criar área de conteúdo
+- [x] Criar `App`
+- [x] Criar layout principal
+- [x] Criar área de conteúdo
 - [ ] Criar navegação
 
 ---
@@ -180,11 +180,11 @@ No mobile, a sidebar deve se adaptar.
 
 ## 3.4 Componentes UI básicos
 
-- [ ] Button
-- [ ] Card
-- [ ] Modal
+- [x] Button
+- [x] Card
+- [x] Modal
 - [ ] Select
-- [ ] ProgressBar
+- [x] ProgressBar
 - [ ] Tooltip
 
 Criar somente componentes que realmente serão utilizados.
@@ -201,10 +201,10 @@ feat: add application shell and ui primitives
 
 ## 4.1 Criar estado global
 
-- [ ] Criar `HabitContext`
-- [ ] Criar reducer
-- [ ] Criar estado inicial
-- [ ] Definir actions
+- [x] Criar `HabitContext`
+- [x] Criar reducer
+- [x] Criar estado inicial
+- [x] Definir actions
 
 Actions mínimas:
 
@@ -249,11 +249,11 @@ feat: add habit state management
 
 Criar funções para:
 
-- [ ] obter dias do mês;
-- [ ] obter semanas;
-- [ ] verificar dia atual;
-- [ ] formatar data;
-- [ ] gerar chave `YYYY-MM-DD`.
+- [x] obter dias do mês;
+- [x] obter semanas;
+- [x] verificar dia atual;
+- [x] formatar data;
+- [x] gerar chave `YYYY-MM-DD`.
 
 Usar `date-fns`.
 
@@ -263,21 +263,21 @@ Usar `date-fns`.
 
 Verificar:
 
-- [ ] janeiro;
-- [ ] fevereiro;
-- [ ] fevereiro em ano bissexto;
-- [ ] abril;
-- [ ] maio;
-- [ ] dezembro.
+- [x] janeiro;
+- [x] fevereiro;
+- [x] fevereiro em ano bissexto;
+- [x] abril;
+- [x] maio;
+- [x] dezembro.
 
 ---
 
 ## 5.3 Seletor de mês
 
-- [ ] mês anterior;
-- [ ] próximo mês;
-- [ ] mês atual;
-- [ ] indicação do mês/ano selecionado.
+- [x] mês anterior;
+- [x] próximo mês;
+- [x] mês atual;
+- [x] indicação do mês/ano selecionado.
 
 A mudança deve ser instantânea, sem reload.
 
@@ -293,38 +293,38 @@ feat: add dynamic month navigation
 
 ## 6.1 Cabeçalho
 
-- [ ] nome do hábito;
-- [ ] dias do mês;
-- [ ] semanas;
-- [ ] destaque para dia atual.
+- [x] nome do hábito;
+- [x] dias do mês;
+- [x] semanas;
+- [x] destaque para dia atual.
 
 ---
 
 ## 6.2 HabitRow
 
-- [ ] renderizar nome;
-- [ ] renderizar ícone;
-- [ ] renderizar células;
-- [ ] mostrar progresso do hábito.
+- [x] renderizar nome;
+- [x] renderizar ícone;
+- [x] renderizar células;
+- [x] mostrar progresso do hábito.
 
 ---
 
 ## 6.3 DayCell
 
-- [ ] estado não concluído;
-- [ ] estado concluído;
-- [ ] hover;
-- [ ] focus;
-- [ ] tooltip;
-- [ ] `aria-label`.
+- [x] estado não concluído;
+- [x] estado concluído;
+- [x] hover;
+- [x] focus;
+- [x] tooltip;
+- [x] `aria-label`.
 
 ---
 
 ## 6.4 Toggle
 
-- [ ] clicar marca;
-- [ ] clicar novamente desmarca;
-- [ ] estado atualiza imediatamente.
+- [x] clicar marca;
+- [x] clicar novamente desmarca;
+- [x] estado atualiza imediatamente.
 
 **Critério:**
 
@@ -342,37 +342,37 @@ feat: implement interactive habit calendar
 
 ## 7.1 Criar hábito
 
-- [ ] botão `+ Novo hábito`;
-- [ ] formulário;
-- [ ] validação do nome;
-- [ ] criar hábito;
-- [ ] fechar modal;
-- [ ] atualizar tabela.
+- [x] botão `+ Novo hábito`;
+- [x] formulário;
+- [x] validação do nome;
+- [x] criar hábito;
+- [x] fechar modal;
+- [x] atualizar tabela.
 
 ---
 
 ## 7.2 Editar hábito
 
-- [ ] editar nome;
-- [ ] editar ícone;
-- [ ] editar meta;
-- [ ] salvar alterações.
+- [x] editar nome;
+- [x] editar ícone;
+- [x] editar meta;
+- [x] salvar alterações.
 
 ---
 
 ## 7.3 Ativar/desativar
 
-- [ ] toggle de ativo;
-- [ ] hábitos inativos não contam nos cálculos;
-- [ ] histórico não deve ser destruído ao desativar.
+- [x] toggle de ativo;
+- [x] hábitos inativos não contam nos cálculos;
+- [x] histórico não deve ser destruído ao desativar.
 
 ---
 
 ## 7.4 Excluir
 
-- [ ] confirmação;
-- [ ] exclusão;
-- [ ] atualizar interface.
+- [x] confirmação;
+- [x] exclusão;
+- [x] atualizar interface.
 
 Definir claramente se o MVP apagará o histórico junto ou se manterá registros; não fazer isso silenciosamente.
 
@@ -388,12 +388,12 @@ feat: add habit management
 
 ## 8.1 Serviço de storage
 
-- [ ] criar `storage.ts`;
-- [ ] salvar estado;
-- [ ] carregar estado;
-- [ ] tratar ausência de dados;
-- [ ] tratar JSON inválido;
-- [ ] fallback seguro.
+- [x] criar `storage.ts`;
+- [x] salvar estado;
+- [x] carregar estado;
+- [x] tratar ausência de dados;
+- [x] tratar JSON inválido;
+- [x] fallback seguro.
 
 ---
 
@@ -401,10 +401,10 @@ feat: add habit management
 
 Salvar quando:
 
-- [ ] hábito é criado;
-- [ ] hábito é editado;
-- [ ] hábito é removido;
-- [ ] conclusão é alterada;
+- [x] hábito é criado;
+- [x] hábito é editado;
+- [x] hábito é removido;
+- [x] conclusão é alterada;
 - [ ] configuração relevante muda.
 
 ---
@@ -435,13 +435,13 @@ feat: persist habit data locally
 
 Criar:
 
-- [ ] `calculateDailyProgress`
-- [ ] `calculateWeeklyProgress`
-- [ ] `calculateMonthlyProgress`
-- [ ] `calculateHabitProgress`
-- [ ] `calculateCompletedCount`
-- [ ] `calculateIncompleteCount`
-- [ ] `calculateGoalProgress`
+- [x] `calculateDailyProgress`
+- [x] `calculateWeeklyProgress`
+- [x] `calculateMonthlyProgress`
+- [x] `calculateHabitProgress`
+- [x] `calculateCompletedCount`
+- [x] `calculateIncompleteCount`
+- [x] `calculateGoalProgress`
 
 ---
 
@@ -449,12 +449,12 @@ Criar:
 
 Garantir:
 
-- [ ] hábitos inativos não contam;
-- [ ] dias corretos do mês;
-- [ ] semanas corretas;
-- [ ] zero hábitos retorna 0%;
-- [ ] percentuais não ultrapassam 100%;
-- [ ] arredondamento consistente.
+- [x] hábitos inativos não contam;
+- [x] dias corretos do mês;
+- [x] semanas corretas;
+- [x] zero hábitos retorna 0%;
+- [x] percentuais não ultrapassam 100%;
+- [x] arredondamento consistente.
 
 ---
 
@@ -487,10 +487,10 @@ feat: add habit progress calculations
 
 Mostrar:
 
-- [ ] percentual mensal;
-- [ ] barra;
-- [ ] quantidade concluída;
-- [ ] quantidade possível.
+- [x] percentual mensal;
+- [x] barra;
+- [x] quantidade concluída;
+- [x] quantidade possível.
 
 ---
 
@@ -498,9 +498,9 @@ Mostrar:
 
 Mostrar:
 
-- [ ] progresso;
-- [ ] concluídos;
-- [ ] incompletos;
+- [x] progresso;
+- [x] concluídos;
+- [x] incompletos;
 - [ ] objetivo diário.
 
 ---
@@ -521,11 +521,11 @@ XX%
 
 Mostrar:
 
-- [ ] Semana 1;
-- [ ] Semana 2;
-- [ ] Semana 3;
-- [ ] Semana 4;
-- [ ] Semana 5 quando existir.
+- [x] Semana 1;
+- [x] Semana 2;
+- [x] Semana 3;
+- [x] Semana 4;
+- [x] Semana 5 quando existir.
 
 **Commit:**
 
@@ -539,12 +539,12 @@ feat: add habit progress dashboard
 
 ## 11.1 Daily Progress Chart
 
-- [ ] criar dados derivados;
-- [ ] integrar Recharts;
-- [ ] eixo X = dias;
-- [ ] eixo Y = percentual;
-- [ ] tooltip;
-- [ ] estado sem dados.
+- [x] criar dados derivados;
+- [x] integrar Recharts;
+- [x] eixo X = dias;
+- [x] eixo Y = percentual;
+- [x] tooltip;
+- [x] estado sem dados.
 
 ---
 
@@ -591,9 +591,9 @@ feat: add progress charts
 
 ## 12.2 Meta por hábito
 
-- [ ] configurar quantidade de dias;
-- [ ] mostrar progresso;
-- [ ] indicar se a meta foi atingida.
+- [x] configurar quantidade de dias;
+- [x] mostrar progresso;
+- [x] indicar se a meta foi atingida.
 
 **Commit:**
 
