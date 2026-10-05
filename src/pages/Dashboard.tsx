@@ -1,17 +1,16 @@
 import { Plus } from 'lucide-react'
 import { useMemo, useState } from 'react'
-import HabitForm from '../components/habits/HabitForm'
 import GoalSummary from '../components/dashboard/GoalSummary'
 import HabitTable from '../components/dashboard/HabitTable'
 import MonthSelector from '../components/dashboard/MonthSelector'
 import ProgressChart from '../components/dashboard/ProgressChart'
 import Button from '../components/ui/Button'
 import Card from '../components/ui/Card'
-import Modal from '../components/ui/Modal'
 import ProgressBar from '../components/ui/ProgressBar'
 import Select from '../components/ui/Select'
+import { useHabitDialogs } from '../hooks/useHabitDialogs'
 import { useHabits } from '../hooks/useHabits'
-import type { Habit, HabitInput } from '../types/habit'
+import { useMonthData } from '../hooks/useMonthData'
 import {
   calculateDailyProgress,
   calculateDaysGoalMet,
@@ -22,28 +21,18 @@ import {
   calculateMonthlyProgress,
   calculatePossibleCount,
   calculateWeeklyProgress,
-  completionKey,
 } from '../utils/calculations'
-import { dateKey, getDaysOfMonth, getWeeks } from '../utils/calendar'
+import { dateKey, getWeeks } from '../utils/calendar'
 import { formatPercent } from '../utils/formatters'
-import { createHabit } from '../utils/habits'
-
-type ModalState = { kind: 'form'; habit?: Habit } | { kind: 'delete'; habit: Habit } | null
 
 export default function Dashboard() {
   const { state, dispatch } = useHabits()
-  const { habits, completions, year, month } = state
-  const [modal, setModal] = useState<ModalState>(null)
+  const { habits } = state
+  const { openCreate, openEdit, openDelete, dialogs } = useHabitDialogs()
+  const { days, dates, done } = useMonthData()
   const [week, setWeek] = useState('all')
 
-  const days = useMemo(() => getDaysOfMonth(year, month), [year, month])
-  const dates = useMemo(() => days.map(dateKey), [days])
   const weeks = useMemo(() => getWeeks(days).map((w) => w.map(dateKey)), [days])
-  const done = useMemo(
-    () => new Set(completions.filter((c) => c.completed).map((c) => completionKey(c.habitId, c.date))),
-    [completions],
-  )
-
   const selectedWeek = week !== 'all' && weeks[Number(week)] ? week : 'all'
   const activeHabits = habits.filter((h) => h.active)
   const completed = calculateCompletedCount(habits, done, dates)
@@ -51,22 +40,12 @@ export default function Dashboard() {
   const monthly = calculateMonthlyProgress(habits, done, dates)
   const chartData = dates.map((d, i) => ({ day: i + 1, percentage: calculateDailyProgress(habits, done, d) }))
 
-  const close = () => setModal(null)
-  const save = (input: HabitInput) => {
-    if (modal?.kind === 'form' && modal.habit) {
-      dispatch({ type: 'UPDATE_HABIT', payload: { id: modal.habit.id, ...input } })
-    } else {
-      dispatch({ type: 'ADD_HABIT', payload: createHabit(input) })
-    }
-    close()
-  }
-
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <MonthSelector />
         <div className="flex flex-wrap items-center gap-3">
-          <Button variant="primary" onClick={() => setModal({ kind: 'form' })}>
+          <Button variant="primary" onClick={() => openCreate()}>
             <Plus size={16} /> Novo hábito
           </Button>
         </div>
@@ -75,7 +54,7 @@ export default function Dashboard() {
       {habits.length === 0 ? (
         <Card>
           <p className="mb-3 text-muted">Você ainda não possui hábitos.</p>
-          <Button variant="primary" onClick={() => setModal({ kind: 'form' })}>
+          <Button variant="primary" onClick={() => openCreate()}>
             + Criar primeiro hábito
           </Button>
         </Card>
@@ -115,8 +94,8 @@ export default function Dashboard() {
               days={days}
               done={done}
               onToggle={(habitId, date) => dispatch({ type: 'TOGGLE_COMPLETION', payload: { habitId, date } })}
-              onEdit={(habit) => setModal({ kind: 'form', habit })}
-              onDelete={(habit) => setModal({ kind: 'delete', habit })}
+              onEdit={(habit) => openEdit(habit)}
+              onDelete={(habit) => openDelete(habit)}
               onToggleActive={(h) => dispatch({ type: 'TOGGLE_HABIT_ACTIVE', payload: h.id })}
             />
           </Card>
@@ -178,30 +157,7 @@ export default function Dashboard() {
         </>
       )}
 
-      {modal?.kind === 'form' && (
-        <Modal title={modal.habit ? 'Editar hábito' : 'Novo hábito'} onClose={close}>
-          <HabitForm initial={modal.habit} onSubmit={save} onCancel={close} />
-        </Modal>
-      )}
-      {modal?.kind === 'delete' && (
-        <Modal title="Excluir hábito?" onClose={close}>
-          <p className="mb-4 text-sm text-muted">
-            “{modal.habit.name}” será excluído e todo o histórico de conclusões dele também será removido. Para manter o histórico, desative o hábito.
-          </p>
-          <div className="flex justify-end gap-2">
-            <Button onClick={close}>Cancelar</Button>
-            <Button
-              variant="danger"
-              onClick={() => {
-                dispatch({ type: 'DELETE_HABIT', payload: modal.habit.id })
-                close()
-              }}
-            >
-              Excluir
-            </Button>
-          </div>
-        </Modal>
-      )}
+      {dialogs}
     </div>
   )
 }

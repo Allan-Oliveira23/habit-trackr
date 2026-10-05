@@ -3,6 +3,7 @@ import Sidebar from './components/layout/Sidebar'
 import Topbar from './components/layout/Topbar'
 import Card from './components/ui/Card'
 import Dashboard from './pages/Dashboard'
+import Habits from './pages/Habits'
 import type { View } from './types/navigation'
 
 export default function App() {
@@ -16,6 +17,8 @@ export default function App() {
         <main className="mx-auto w-full max-w-7xl px-4 py-6 pb-24 sm:px-6 md:pb-6">
           {view === 'dashboard' ? (
             <Dashboard />
+          ) : view === 'habits' ? (
+            <Habits />
           ) : (
             <Card>
               <p className="text-sm text-muted">Esta página ainda não foi implementada.</p>

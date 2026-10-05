@@ -609,13 +609,13 @@ feat: add habit goals
 
 Criar `/habits`.
 
-- [ ] lista completa;
-- [ ] criar;
-- [ ] editar;
-- [ ] ativar/desativar;
-- [ ] excluir;
-- [ ] mostrar meta;
-- [ ] mostrar progresso.
+- [x] lista completa;
+- [x] criar;
+- [x] editar;
+- [x] ativar/desativar;
+- [x] excluir;
+- [x] mostrar meta;
+- [x] mostrar progresso.
 
 ---
 
