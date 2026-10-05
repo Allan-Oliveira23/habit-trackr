@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import Sidebar from './components/layout/Sidebar'
 import Topbar from './components/layout/Topbar'
-import Card from './components/ui/Card'
 import Dashboard from './pages/Dashboard'
 import Habits from './pages/Habits'
+import Settings from './pages/Settings'
 import Statistics from './pages/Statistics'
 import type { View } from './types/navigation'
 
@@ -23,9 +23,7 @@ export default function App() {
           ) : view === 'statistics' ? (
             <Statistics />
           ) : (
-            <Card>
-              <p className="text-sm text-muted">Esta página ainda não foi implementada.</p>
-            </Card>
+            <Settings />
           )}
         </main>
       </div>

@@ -1,6 +1,6 @@
-import { useId } from 'react'
 import { calculateDailyGoalProgress } from '../../utils/calculations'
 import { formatPercent } from '../../utils/formatters'
+import DailyGoalField from './DailyGoalField'
 import ProgressBar from '../ui/ProgressBar'
 
 interface Props {
@@ -14,28 +14,9 @@ interface Props {
 }
 
 export default function GoalSummary({ goal, maxGoal, todayCompleted, daysMet, totalDays, onChange }: Props) {
-  const id = useId()
-  const handle = (raw: string) => {
-    const n = Number(raw)
-    onChange(raw === '' || !Number.isInteger(n) || n < 1 ? undefined : Math.min(n, Math.max(maxGoal, 1)))
-  }
-
   return (
     <div className="space-y-3 text-sm">
-      <div className="flex items-center gap-2">
-        <label htmlFor={id} className="text-muted">
-          Objetivo diário (hábitos por dia)
-        </label>
-        <input
-          id={id}
-          type="number"
-          min={1}
-          max={Math.max(maxGoal, 1)}
-          value={goal ?? ''}
-          onChange={(e) => handle(e.target.value)}
-          className="w-16 rounded-lg border border-line bg-bg px-2 py-1.5"
-        />
-      </div>
+      <DailyGoalField goal={goal} maxGoal={maxGoal} onChange={onChange} />
       {goal === undefined ? (
         <p className="text-muted">Defina um objetivo diário para acompanhar sua meta.</p>
       ) : (

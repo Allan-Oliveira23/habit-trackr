@@ -645,10 +645,10 @@ Criar `/settings`.
 
 MVP:
 
-- [ ] objetivo diário;
-- [ ] preferências básicas;
-- [ ] resetar dados;
-- [ ] confirmação antes do reset.
+- [x] objetivo diário;
+- [ ] preferências básicas; _(nenhuma preferência além do objetivo diário existe ainda)_
+- [x] resetar dados;
+- [x] confirmação antes do reset.
 
 O reset deve ser uma ação claramente destrutiva.
 
