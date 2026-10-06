@@ -8,7 +8,7 @@ interface Props {
   onCancel: () => void
 }
 
-const field = 'w-full rounded-lg border border-line bg-bg px-3 py-2 text-sm'
+const field = 'w-full rounded-lg border border-line bg-bg px-3 py-2 text-base md:text-sm'
 
 export default function HabitForm({ initial, onSubmit, onCancel }: Props) {
   const [name, setName] = useState(initial?.name ?? '')

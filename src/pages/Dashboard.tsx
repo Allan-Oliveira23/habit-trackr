@@ -54,8 +54,8 @@ export default function Dashboard() {
         </Card>
       ) : (
         <>
-          <div className="grid gap-4 md:grid-cols-3">
-            <Card title="Progresso do mês" className="md:col-span-2">
+          <div className="grid gap-4 lg:grid-cols-3">
+            <Card title="Progresso do mês" className="lg:col-span-2">
               <p className="mb-2 text-4xl font-semibold text-ok">{formatPercent(monthly)}</p>
               <ProgressBar value={monthly} label="Progresso mensal" />
               <p className="mt-2 text-sm text-muted">
@@ -102,7 +102,7 @@ export default function Dashboard() {
             )}
           </Card>
 
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4 lg:grid-cols-2">
             <WeeklySummary habits={habits} done={done} weeks={weeks} />
             <HabitProgressList habits={habits} dates={dates} done={done} />
           </div>

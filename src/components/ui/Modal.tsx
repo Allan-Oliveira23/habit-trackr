@@ -20,7 +20,7 @@ export default function Modal({ title, onClose, children }: Props) {
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
       onMouseDown={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div role="dialog" aria-modal="true" aria-labelledby={titleId} className="w-full max-w-md rounded-xl border border-line bg-card p-5">
+      <div role="dialog" aria-modal="true" aria-labelledby={titleId} className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-xl border border-line bg-card p-5">
         <h2 id={titleId} className="mb-4 text-lg font-semibold">
           {title}
         </h2>

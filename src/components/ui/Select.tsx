@@ -23,7 +23,7 @@ export default function Select({ label, value, options, onChange }: Props) {
         id={id}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="rounded-lg border border-line bg-bg px-2 py-1.5 text-sm"
+        className="rounded-lg border border-line bg-bg px-2 py-1.5 text-base md:text-sm"
       >
         {options.map((o) => (
           <option key={o.value} value={o.value}>

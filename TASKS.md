@@ -421,7 +421,7 @@ recarregar página
 estado continua correto
 ```
 
-- [x] Verificado com teste de recarga simulada (jsdom); falta conferir em navegador real.
+- [x] Verificado com teste de recarga simulada (jsdom) e em Chromium headless (toque + reload real).
 
 **Commit:**
 
@@ -664,25 +664,25 @@ feat: add settings page
 
 ## Desktop
 
-- [ ] sidebar;
-- [ ] tabela;
-- [ ] cards;
-- [ ] gráficos.
+- [x] sidebar;
+- [x] tabela;
+- [x] cards;
+- [x] gráficos.
 
 ## Tablet
 
-- [ ] espaçamento;
-- [ ] tabela horizontal;
-- [ ] cards adaptáveis.
+- [x] espaçamento;
+- [x] tabela horizontal;
+- [x] cards adaptáveis.
 
 ## Mobile
 
-- [ ] navegação adaptada;
-- [ ] tabela com scroll horizontal;
-- [ ] primeira coluna fixa quando apropriado;
-- [ ] células adequadas para toque;
-- [ ] cards empilhados;
-- [ ] gráficos responsivos.
+- [x] navegação adaptada;
+- [x] tabela com scroll horizontal;
+- [x] primeira coluna fixa quando apropriado;
+- [x] células adequadas para toque;
+- [x] cards empilhados;
+- [x] gráficos responsivos.
 
 **Critério:**
 

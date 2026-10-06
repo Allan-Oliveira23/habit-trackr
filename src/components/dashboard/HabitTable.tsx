@@ -16,7 +16,7 @@ interface Props {
   onToggleActive: (habit: Habit) => void
 }
 
-const iconBtn = 'rounded p-1 text-muted hover:bg-white/10 hover:text-white'
+const iconBtn = 'hidden rounded p-1 text-muted hover:bg-white/10 hover:text-white md:block'
 
 export default function HabitTable({ habits, days, done, onToggle, onEdit, onDelete, onToggleActive }: Props) {
   const weeks = getWeeks(days)
@@ -38,7 +38,7 @@ export default function HabitTable({ habits, days, done, onToggle, onEdit, onDel
           <tr>
             <th className="sticky left-0 z-10 bg-card px-2 text-left text-xs font-medium text-muted">Hábito</th>
             {days.map((d) => (
-              <th key={dateKey(d)} className={`w-8 text-center text-xs font-normal ${isToday(d) ? 'text-warn' : 'text-muted'}`}>
+              <th key={dateKey(d)} className={`w-10 text-center text-xs md:w-8 font-normal ${isToday(d) ? 'text-warn' : 'text-muted'}`}>
                 <div>{weekdayInitial(d)}</div>
                 <div>{String(d.getDate()).padStart(2, '0')}</div>
               </th>
@@ -52,7 +52,7 @@ export default function HabitTable({ habits, days, done, onToggle, onEdit, onDel
             return (
               <tr key={h.id} className={h.active ? '' : 'opacity-50'}>
                 <th scope="row" className="sticky left-0 z-10 bg-card px-2 text-left font-normal">
-                  <div className="flex min-w-44 items-center gap-2">
+                  <div className="flex min-w-28 max-w-36 items-center gap-2 md:min-w-44 md:max-w-none">
                     <span aria-hidden>{h.icon}</span>
                     <span className="flex-1 truncate">{h.name}</span>
                     <button aria-label={`Editar ${h.name}`} className={iconBtn} onClick={() => onEdit(h)}>

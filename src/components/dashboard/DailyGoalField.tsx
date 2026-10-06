@@ -28,7 +28,7 @@ export default function DailyGoalField({ goal, maxGoal, onChange }: Props) {
         max={max}
         value={goal ?? ''}
         onChange={(e) => handle(e.target.value)}
-        className="w-16 rounded-lg border border-line bg-bg px-2 py-1.5"
+        className="w-16 rounded-lg border border-line bg-bg px-2 py-1.5 text-base md:text-sm"
       />
     </div>
   )

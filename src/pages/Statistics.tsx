@@ -32,7 +32,7 @@ export default function Statistics() {
         </Card>
       ) : (
         <>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 lg:grid-cols-3">
             <Card title="Progresso mensal">
               <p className="mb-2 text-3xl font-semibold text-ok">{formatPercent(monthly)}</p>
               <ProgressBar value={monthly} label="Progresso mensal" />
@@ -65,7 +65,7 @@ export default function Statistics() {
             )}
           </Card>
 
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4 lg:grid-cols-2">
             <WeeklySummary habits={habits} done={done} weeks={weeks} />
             <HabitProgressList habits={habits} dates={dates} done={done} />
           </div>

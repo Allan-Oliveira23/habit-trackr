@@ -18,7 +18,7 @@ export default function MonthSelector() {
       <Button aria-label="Mês anterior" onClick={() => shift(-1)}>
         <ChevronLeft size={16} />
       </Button>
-      <span aria-live="polite" className="min-w-40 text-center text-sm font-semibold capitalize">
+      <span aria-live="polite" className="min-w-40 text-center text-sm font-semibold">
         {formatMonthLabel(state.year, state.month)}
       </span>
       <Button aria-label="Próximo mês" onClick={() => shift(1)}>

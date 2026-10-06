@@ -20,8 +20,10 @@ export const getWeeks = (days: Date[]): Date[][] => {
   return weeks
 }
 
-export const formatMonthLabel = (year: number, month: number): string =>
-  format(new Date(year, month, 1), "MMMM 'de' yyyy", { locale: ptBR })
+export const formatMonthLabel = (year: number, month: number): string => {
+  const label = format(new Date(year, month, 1), "MMMM 'de' yyyy", { locale: ptBR })
+  return label.charAt(0).toUpperCase() + label.slice(1)
+}
 
 export const formatFullDate = (d: Date): string => format(d, 'dd/MM/yyyy')
 

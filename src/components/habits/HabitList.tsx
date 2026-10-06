@@ -28,7 +28,7 @@ export default function HabitList({ habits, dates, done, onEdit, onDelete, onTog
                 <span className="font-medium">{h.name}</span>
                 {!h.active && <span className="rounded bg-white/10 px-2 py-0.5 text-xs text-muted">Inativo</span>}
               </div>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 <Button onClick={() => onEdit(h)} aria-label={`Editar ${h.name}`}>
                   <Pencil size={14} aria-hidden /> Editar
                 </Button>
