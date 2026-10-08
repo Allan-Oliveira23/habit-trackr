@@ -3,6 +3,9 @@ import { ptBR } from 'date-fns/locale'
 
 export const dateKey = (d: Date): string => format(d, 'yyyy-MM-dd')
 
+/** Dia posterior a hoje. */
+export const isAfterToday = (d: Date): boolean => dateKey(d) > dateKey(new Date())
+
 export const getDaysOfMonth = (year: number, month: number): Date[] => {
   const start = new Date(year, month, 1)
   return eachDayOfInterval({ start, end: endOfMonth(start) })

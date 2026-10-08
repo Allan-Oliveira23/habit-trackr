@@ -1,13 +1,15 @@
+import { progressTone, type Tone } from '../../utils/tone'
+
 interface Props {
   value: number
   label: string
-  tone?: 'ok' | 'warn' | 'bad'
+  tone?: Tone
 }
 
 const tones = { ok: 'bg-ok', warn: 'bg-warn', bad: 'bg-bad' }
 
 export default function ProgressBar({ value, label, tone }: Props) {
-  const color = tone ?? (value >= 70 ? 'ok' : value >= 40 ? 'warn' : 'bad')
+  const color = tone ?? progressTone(value)
   return (
     <div
       role="progressbar"

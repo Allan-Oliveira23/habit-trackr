@@ -2,7 +2,7 @@ import { isToday } from 'date-fns'
 import { Pencil, Power, Trash2 } from 'lucide-react'
 import type { Habit } from '../../types/habit'
 import { calculateHabitProgress, completionKey, type CompletionSet } from '../../utils/calculations'
-import { dateKey, formatFullDate, formatMonthLabel, getWeeks, weekdayInitial } from '../../utils/calendar'
+import { dateKey, formatFullDate, formatMonthLabel, getWeeks, isAfterToday, weekdayInitial } from '../../utils/calendar'
 import { formatPercent } from '../../utils/formatters'
 import DayCell from './DayCell'
 
@@ -85,6 +85,7 @@ export default function HabitTable({ habits, days, done, onToggle, onEdit, onDel
                         date={d}
                         completed={done.has(completionKey(h.id, key))}
                         today={isToday(d)}
+                        future={isAfterToday(d)}
                         onToggle={() => onToggle(h.id, key)}
                       />
                     </td>

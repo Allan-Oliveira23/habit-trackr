@@ -13,6 +13,7 @@ import {
   calculateTotalCompletions,
 } from '../utils/calculations'
 import { formatDateKey, formatPercent } from '../utils/formatters'
+import { progressTone, toneTextClass } from '../utils/tone'
 
 export default function Statistics() {
   const { state } = useHabits()
@@ -34,7 +35,7 @@ export default function Statistics() {
         <>
           <div className="grid gap-4 lg:grid-cols-3">
             <Card title="Progresso mensal">
-              <p className="mb-2 text-3xl font-semibold text-ok">{formatPercent(monthly)}</p>
+              <p className={`mb-2 text-3xl font-semibold ${toneTextClass[progressTone(monthly)]}`}>{formatPercent(monthly)}</p>
               <ProgressBar value={monthly} label="Progresso mensal" />
               <p className="mt-2 text-sm text-muted">
                 {calculateCompletedCount(habits, done, dates)} / {calculatePossibleCount(habits, dates)} possíveis

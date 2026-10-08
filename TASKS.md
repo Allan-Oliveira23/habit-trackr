@@ -748,15 +748,15 @@ feat: add application states
 
 # FASE 19 — Refinamento visual
 
-- [ ] revisar espaçamento;
-- [ ] revisar tipografia;
-- [ ] revisar hierarquia visual;
-- [ ] revisar bordas;
-- [ ] revisar estados hover;
-- [ ] revisar estados active;
-- [ ] revisar estados disabled;
-- [ ] revisar gráficos;
-- [ ] remover elementos visuais desnecessários.
+- [x] revisar espaçamento;
+- [x] revisar tipografia;
+- [x] revisar hierarquia visual;
+- [x] revisar bordas;
+- [x] revisar estados hover;
+- [x] revisar estados active;
+- [x] revisar estados disabled;
+- [x] revisar gráficos;
+- [x] remover elementos visuais desnecessários.
 
 Objetivo:
 

@@ -2,7 +2,8 @@ import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YA
 
 export interface DailyPoint {
   day: number
-  percentage: number
+  /** null para dias futuros (não plotados). */
+  percentage: number | null
 }
 
 export default function ProgressChart({ data }: { data: DailyPoint[] }) {
@@ -24,7 +25,7 @@ export default function ProgressChart({ data }: { data: DailyPoint[] }) {
             labelFormatter={(d) => `Dia ${d}`}
             formatter={(v) => [`${v}%`, 'Progresso']}
           />
-          <Area type="monotone" dataKey="percentage" stroke="#2dd4bf" strokeWidth={2} fill="url(#okFill)" />
+          <Area type="linear" dataKey="percentage" stroke="#2dd4bf" strokeWidth={2} fill="url(#okFill)" />
         </AreaChart>
       </ResponsiveContainer>
     </div>

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { Habit } from '../../types/habit'
 import { calculateWeeklyProgress, type CompletionSet } from '../../utils/calculations'
+import { dateKey } from '../../utils/calendar'
 import { formatPercent } from '../../utils/formatters'
 import Card from '../ui/Card'
 import ProgressBar from '../ui/ProgressBar'
@@ -15,6 +16,7 @@ interface Props {
 
 export default function WeeklySummary({ habits, done, weeks }: Props) {
   const [week, setWeek] = useState('all')
+  const todayKey = dateKey(new Date())
   const selected = week !== 'all' && weeks[Number(week)] ? week : 'all'
 
   return (
@@ -30,14 +32,15 @@ export default function WeeklySummary({ habits, done, weeks }: Props) {
       <ul className="space-y-3">
         {weeks.map((w, i) => {
           if (selected !== 'all' && selected !== String(i)) return null
+          const future = w.every((d) => d > todayKey)
           const p = calculateWeeklyProgress(habits, done, w)
           return (
             <li key={i}>
               <div className="mb-1 flex justify-between text-sm">
                 <span>Semana {i + 1}</span>
-                <span>{formatPercent(p)}</span>
+                <span className={future ? 'text-muted' : ''}>{future ? 'Ainda não começou' : formatPercent(p)}</span>
               </div>
-              <ProgressBar value={p} label={`Progresso da semana ${i + 1}`} />
+              <ProgressBar value={future ? 0 : p} label={`Progresso da semana ${i + 1}`} />
             </li>
           )
         })}

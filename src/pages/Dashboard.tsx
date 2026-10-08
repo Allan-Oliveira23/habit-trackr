@@ -21,6 +21,7 @@ import {
 } from '../utils/calculations'
 import { dateKey } from '../utils/calendar'
 import { formatPercent } from '../utils/formatters'
+import { progressTone, toneTextClass } from '../utils/tone'
 
 export default function Dashboard() {
   const { state, dispatch } = useHabits()
@@ -32,7 +33,7 @@ export default function Dashboard() {
   const completed = calculateCompletedCount(habits, done, dates)
   const possible = calculatePossibleCount(habits, dates)
   const monthly = calculateMonthlyProgress(habits, done, dates)
-  const chartData = dates.map((d, i) => ({ day: i + 1, percentage: calculateDailyProgress(habits, done, d) }))
+  const chartData = dates.map((d, i) => ({ day: i + 1, percentage: d > dateKey(new Date()) ? null : calculateDailyProgress(habits, done, d) }))
 
   return (
     <div className="space-y-4">
@@ -54,39 +55,31 @@ export default function Dashboard() {
         </Card>
       ) : (
         <>
-          <div className="grid gap-4 lg:grid-cols-3">
-            <Card title="Progresso do mês" className="lg:col-span-2">
+          <div className="grid gap-4 lg:grid-cols-2">
+            <Card title="Progresso do mês">
               {possible === 0 ? (
                 <p className="text-sm text-muted">Nenhum hábito ativo. Ative ou crie um hábito para acompanhar o progresso do mês.</p>
               ) : (
                 <>
-                  <p className="mb-2 text-4xl font-semibold text-ok">{formatPercent(monthly)}</p>
+                  <p className={`mb-2 text-4xl font-semibold ${toneTextClass[progressTone(monthly)]}`}>{formatPercent(monthly)}</p>
                   <ProgressBar value={monthly} label="Progresso mensal" />
                   <p className="mt-2 text-sm text-muted">
-                    {completed} / {possible} possíveis
+                    {completed} / {possible} possíveis · {calculateIncompleteCount(habits, done, dates)} incompletos · {activeHabits.length} hábitos ativos
                   </p>
                 </>
               )}
             </Card>
-            <Card title="Resumo">
-              <dl className="space-y-1 text-sm">
-                <div className="flex justify-between"><dt className="text-muted">Concluídos</dt><dd className="text-ok">{completed}</dd></div>
-                <div className="flex justify-between"><dt className="text-muted">Incompletos</dt><dd className="text-bad">{calculateIncompleteCount(habits, done, dates)}</dd></div>
-                <div className="flex justify-between"><dt className="text-muted">Hábitos ativos</dt><dd>{activeHabits.length}</dd></div>
-              </dl>
+            <Card title="Meta diária">
+              <GoalSummary
+                goal={state.settings.dailyGoal}
+                maxGoal={activeHabits.length}
+                todayCompleted={dates.includes(dateKey(new Date())) ? calculateCompletedCount(habits, done, [dateKey(new Date())]) : null}
+                daysMet={state.settings.dailyGoal ? calculateDaysGoalMet(habits, done, dates, state.settings.dailyGoal) : 0}
+                totalDays={dates.length}
+                onChange={(goal) => dispatch({ type: 'SET_DAILY_GOAL', payload: goal })}
+              />
             </Card>
           </div>
-
-          <Card title="Meta diária">
-            <GoalSummary
-              goal={state.settings.dailyGoal}
-              maxGoal={activeHabits.length}
-              todayCompleted={dates.includes(dateKey(new Date())) ? calculateCompletedCount(habits, done, [dateKey(new Date())]) : null}
-              daysMet={state.settings.dailyGoal ? calculateDaysGoalMet(habits, done, dates, state.settings.dailyGoal) : 0}
-              totalDays={dates.length}
-              onChange={(goal) => dispatch({ type: 'SET_DAILY_GOAL', payload: goal })}
-            />
-          </Card>
 
           <Card title="Hábitos">
             <HabitTable
