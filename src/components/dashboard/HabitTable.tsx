@@ -2,7 +2,7 @@ import { isToday } from 'date-fns'
 import { Pencil, Power, Trash2 } from 'lucide-react'
 import type { Habit } from '../../types/habit'
 import { calculateHabitProgress, completionKey, type CompletionSet } from '../../utils/calculations'
-import { dateKey, getWeeks, weekdayInitial } from '../../utils/calendar'
+import { dateKey, formatFullDate, formatMonthLabel, getWeeks, weekdayInitial } from '../../utils/calendar'
 import { formatPercent } from '../../utils/formatters'
 import DayCell from './DayCell'
 
@@ -25,42 +25,47 @@ export default function HabitTable({ habits, days, done, onToggle, onEdit, onDel
   return (
     <div className="overflow-x-auto">
       <table className="border-separate border-spacing-x-0.5 border-spacing-y-1 text-sm">
+        <caption className="sr-only">
+          Hábitos de {formatMonthLabel(days[0].getFullYear(), days[0].getMonth())}
+        </caption>
         <thead>
           <tr>
-            <th className="sticky left-0 z-10 bg-card" />
+            <td className="sticky left-0 z-10 bg-card" />
             {weeks.map((w, i) => (
-              <th key={i} colSpan={w.length} className="border-b border-line pb-1 text-xs font-medium text-muted">
+              <th key={i} scope="colgroup" colSpan={w.length} className="border-b border-line pb-1 text-xs font-medium text-muted">
                 Semana {i + 1}
               </th>
             ))}
-            <th />
+            <td />
           </tr>
           <tr>
-            <th className="sticky left-0 z-10 bg-card px-2 text-left text-xs font-medium text-muted">Hábito</th>
+            <th scope="col" className="sticky left-0 z-10 bg-card px-2 text-left text-xs font-medium text-muted">Hábito</th>
             {days.map((d) => (
-              <th key={dateKey(d)} className={`w-10 text-center text-xs md:w-8 font-normal ${isToday(d) ? 'text-warn' : 'text-muted'}`}>
+              <th key={dateKey(d)} scope="col" aria-label={formatFullDate(d)} className={`w-10 text-center text-xs md:w-8 font-normal ${isToday(d) ? 'text-warn' : 'text-muted'}`}>
                 <div>{weekdayInitial(d)}</div>
                 <div>{String(d.getDate()).padStart(2, '0')}</div>
               </th>
             ))}
-            <th className="px-2 text-xs font-medium text-muted">Progresso</th>
+            <th scope="col" className="px-2 text-xs font-medium text-muted">Progresso</th>
           </tr>
         </thead>
         <tbody>
           {habits.map((h) => {
             const p = calculateHabitProgress(h.id, done, dates)
             return (
-              <tr key={h.id} className={h.active ? '' : 'opacity-50'}>
+              <tr key={h.id}>
                 <th scope="row" className="sticky left-0 z-10 bg-card px-2 text-left font-normal">
                   <div className="flex min-w-28 max-w-36 items-center gap-2 md:min-w-44 md:max-w-none">
                     <span aria-hidden>{h.icon}</span>
-                    <span className="flex-1 truncate">{h.name}</span>
+                    <span className={`flex-1 truncate ${h.active ? '' : 'text-muted'}`}>
+                      {h.name}
+                      {!h.active && <span className="sr-only"> (inativo)</span>}
+                    </span>
                     <button aria-label={`Editar ${h.name}`} className={iconBtn} onClick={() => onEdit(h)}>
                       <Pencil size={14} />
                     </button>
                     <button
                       aria-label={`${h.active ? 'Desativar' : 'Ativar'} ${h.name}`}
-                      aria-pressed={h.active}
                       className={iconBtn}
                       onClick={() => onToggleActive(h)}
                     >

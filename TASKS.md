@@ -698,13 +698,13 @@ style: improve responsive dashboard
 
 # FASE 17 — Acessibilidade
 
-- [ ] foco visível;
-- [ ] `aria-label`;
-- [ ] navegação por teclado;
-- [ ] botões semânticos;
-- [ ] contraste;
-- [ ] modais acessíveis;
-- [ ] tooltips não devem ser a única forma de obter informação importante.
+- [x] foco visível;
+- [x] `aria-label`;
+- [x] navegação por teclado;
+- [x] botões semânticos;
+- [x] contraste;
+- [x] modais acessíveis;
+- [x] tooltips não devem ser a única forma de obter informação importante.
 
 **Commit:**
 

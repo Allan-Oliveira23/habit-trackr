@@ -21,11 +21,11 @@ export default function HabitList({ habits, dates, done, onEdit, onDelete, onTog
         const p = calculateHabitProgress(h.id, done, dates)
         const goalPct = calculateGoalProgress(h, p.completed)
         return (
-          <li key={h.id} className={`rounded-xl border border-line bg-card p-4 ${h.active ? '' : 'opacity-60'}`}>
+          <li key={h.id} className={`rounded-xl border border-line bg-card p-4 ${h.active ? '' : 'border-dashed'}`}>
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2">
                 <span aria-hidden className="text-xl">{h.icon}</span>
-                <span className="font-medium">{h.name}</span>
+                <span className={`font-medium ${h.active ? '' : 'text-muted'}`}>{h.name}</span>
                 {!h.active && <span className="rounded bg-white/10 px-2 py-0.5 text-xs text-muted">Inativo</span>}
               </div>
               <div className="flex flex-wrap gap-2">
