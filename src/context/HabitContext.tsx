@@ -15,7 +15,8 @@ export function HabitProvider({ children }: { children: ReactNode }) {
 
   // Auto-save: toda alteração de dados persistentes é gravada.
   useEffect(() => {
-    saveData({ habits: state.habits, completions: state.completions, settings: state.settings })
+    const saved = saveData({ habits: state.habits, completions: state.completions, settings: state.settings })
+    if (!saved) dispatch({ type: 'SET_NOTICE', payload: 'save-failed' })
   }, [state.habits, state.completions, state.settings])
 
   return <HabitContext.Provider value={{ state, dispatch }}>{children}</HabitContext.Provider>

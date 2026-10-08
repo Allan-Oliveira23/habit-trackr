@@ -718,25 +718,25 @@ feat: improve accessibility
 
 ## Primeiro acesso
 
-- [ ] onboarding simples ou dados iniciais.
+- [x] onboarding simples ou dados iniciais.
 
 ## Sem hábitos
 
-- [ ] empty state.
+- [x] empty state.
 
 ## Sem dados no período
 
-- [ ] gráfico vazio;
-- [ ] resumo coerente.
+- [x] gráfico vazio;
+- [x] resumo coerente.
 
 ## Erro
 
-- [ ] mensagem;
-- [ ] ação de recuperação.
+- [x] mensagem;
+- [x] ação de recuperação.
 
 ## Loading
 
-- [ ] loading state quando necessário.
+- [x] loading state quando necessário. _(não necessário: a leitura do localStorage é síncrona)_
 
 **Commit:**
 

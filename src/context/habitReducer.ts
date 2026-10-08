@@ -1,6 +1,6 @@
 import { createSeedHabits } from '../data/seed'
 import { loadData } from '../services/storage'
-import type { Habit, HabitState } from '../types/habit'
+import type { Habit, HabitState, Notice } from '../types/habit'
 
 export type HabitAction =
   | { type: 'ADD_HABIT'; payload: Habit }
@@ -11,13 +11,15 @@ export type HabitAction =
   | { type: 'SET_MONTH'; payload: number }
   | { type: 'SET_YEAR'; payload: number }
   | { type: 'SET_DAILY_GOAL'; payload: number | undefined }
+  | { type: 'SET_NOTICE'; payload: Notice }
   | { type: 'RESET_DATA' }
 
 const currentPeriod = () => ({ year: new Date().getFullYear(), month: new Date().getMonth() })
 
 export const createInitialState = (): HabitState => {
-  const saved = loadData()
-  return { ...(saved ?? { habits: createSeedHabits(), completions: [], settings: {} }), ...currentPeriod() }
+  const { data, corrupted } = loadData()
+  const base = data ?? { habits: createSeedHabits(), completions: [], settings: {} }
+  return { ...base, notice: corrupted ? 'corrupted' : null, ...currentPeriod() }
 }
 
 export function habitReducer(state: HabitState, action: HabitAction): HabitState {
@@ -48,7 +50,9 @@ export function habitReducer(state: HabitState, action: HabitAction): HabitState
       return { ...state, year: action.payload }
     case 'SET_DAILY_GOAL':
       return { ...state, settings: { ...state.settings, dailyGoal: action.payload } }
+    case 'SET_NOTICE':
+      return { ...state, notice: action.payload }
     case 'RESET_DATA':
-      return { habits: createSeedHabits(), completions: [], settings: {}, ...currentPeriod() }
+      return { habits: createSeedHabits(), completions: [], settings: {}, notice: null, ...currentPeriod() }
   }
 }

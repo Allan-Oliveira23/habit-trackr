@@ -1,6 +1,7 @@
 import type { AppSettings, Habit, HabitCompletion, PersistedData } from '../types/habit'
 
 const KEY = 'habit-tracker-data'
+const BACKUP_KEY = 'habit-tracker-data-backup'
 
 const isObject = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null
 
@@ -23,11 +24,14 @@ function normalizeCompletion(v: unknown): HabitCompletion | null {
   return { habitId: v.habitId, date: v.date, completed: v.completed === true }
 }
 
-/** Retorna null quando não há dados válidos (vazio, JSON inválido ou formato inesperado). */
-export function loadData(): PersistedData | null {
+export interface LoadResult {
+  data: PersistedData | null
+  /** true quando havia conteúdo salvo, mas ilegível/inválido (uma cópia fica em BACKUP_KEY). */
+  corrupted: boolean
+}
+
+function parseStored(raw: string): PersistedData | null {
   try {
-    const raw = localStorage.getItem(KEY)
-    if (!raw) return null
     const parsed: unknown = JSON.parse(raw)
     if (!isObject(parsed) || !Array.isArray(parsed.habits)) return null
     const settings: AppSettings = {}
@@ -46,10 +50,34 @@ export function loadData(): PersistedData | null {
   }
 }
 
-export function saveData(data: PersistedData): void {
+export function loadData(): LoadResult {
+  try {
+    const raw = localStorage.getItem(KEY)
+    if (!raw) return { data: null, corrupted: false }
+    const data = parseStored(raw)
+    if (data) return { data, corrupted: false }
+    localStorage.setItem(BACKUP_KEY, raw) // preserva o conteúdo antes de ser sobrescrito
+    return { data: null, corrupted: true }
+  } catch {
+    return { data: null, corrupted: false }
+  }
+}
+
+/** Conteúdo original guardado quando os dados salvos estavam inválidos. */
+export function getBackup(): string | null {
+  try {
+    return localStorage.getItem(BACKUP_KEY)
+  } catch {
+    return null
+  }
+}
+
+/** Retorna false quando não foi possível gravar (armazenamento indisponível ou cheio). */
+export function saveData(data: PersistedData): boolean {
   try {
     localStorage.setItem(KEY, JSON.stringify(data))
+    return true
   } catch {
-    // armazenamento indisponível/cheio: a aplicação continua funcionando em memória
+    return false
   }
 }

@@ -24,7 +24,10 @@ export interface PersistedData {
   settings: AppSettings
 }
 
+export type Notice = 'corrupted' | 'save-failed' | null
+
 export interface HabitState extends PersistedData {
+  notice: Notice
   year: number
   month: number // 0-11
 }

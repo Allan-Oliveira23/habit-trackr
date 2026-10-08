@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import NoticeBanner from './components/layout/NoticeBanner'
 import Sidebar from './components/layout/Sidebar'
 import Topbar from './components/layout/Topbar'
 import Dashboard from './pages/Dashboard'
@@ -15,6 +16,7 @@ export default function App() {
       <Sidebar current={view} onChange={setView} />
       <div className="min-w-0 flex-1">
         <Topbar view={view} />
+        <NoticeBanner />
         <main className="mx-auto w-full max-w-7xl px-4 py-6 pb-24 sm:px-6 md:pb-6">
           {view === 'dashboard' ? (
             <Dashboard />

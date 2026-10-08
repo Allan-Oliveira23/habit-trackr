@@ -56,11 +56,17 @@ export default function Dashboard() {
         <>
           <div className="grid gap-4 lg:grid-cols-3">
             <Card title="Progresso do mês" className="lg:col-span-2">
-              <p className="mb-2 text-4xl font-semibold text-ok">{formatPercent(monthly)}</p>
-              <ProgressBar value={monthly} label="Progresso mensal" />
-              <p className="mt-2 text-sm text-muted">
-                {completed} / {possible} possíveis
-              </p>
+              {possible === 0 ? (
+                <p className="text-sm text-muted">Nenhum hábito ativo. Ative ou crie um hábito para acompanhar o progresso do mês.</p>
+              ) : (
+                <>
+                  <p className="mb-2 text-4xl font-semibold text-ok">{formatPercent(monthly)}</p>
+                  <ProgressBar value={monthly} label="Progresso mensal" />
+                  <p className="mt-2 text-sm text-muted">
+                    {completed} / {possible} possíveis
+                  </p>
+                </>
+              )}
             </Card>
             <Card title="Resumo">
               <dl className="space-y-1 text-sm">
@@ -97,6 +103,8 @@ export default function Dashboard() {
           <Card title="Progresso diário">
             {activeHabits.length === 0 ? (
               <p className="text-sm text-muted">Ative ao menos um hábito para ver o gráfico.</p>
+            ) : completed === 0 ? (
+              <p className="text-sm text-muted">Nenhuma conclusão registrada neste mês. Marque um hábito na tabela para ver o gráfico.</p>
             ) : (
               <ProgressChart data={chartData} />
             )}
