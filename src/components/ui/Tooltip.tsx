@@ -17,7 +17,8 @@ export default function Tooltip({ content, children }: Props) {
   const hide = () => setPos(null)
 
   return (
-    <span ref={ref} className="inline-flex" onMouseEnter={show} onMouseLeave={hide} onFocus={show} onBlur={hide}>
+    // biome-ignore lint/a11y/noStaticElementInteractions: wrapper só escuta hover e foco que borbulham do filho focável; não é um controle
+    <span ref={ref} role="presentation" className="inline-flex" onMouseEnter={show} onMouseLeave={hide} onFocus={show} onBlur={hide}>
       {children}
       {pos && (
         <span

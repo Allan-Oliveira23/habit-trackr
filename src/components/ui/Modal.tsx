@@ -15,7 +15,10 @@ export default function Modal({ title, onClose, children }: Props) {
   // Capturado na renderização, antes de qualquer autoFocus dos filhos.
   const [opener] = useState(() => document.activeElement as HTMLElement | null)
   const closeRef = useRef(onClose)
-  closeRef.current = onClose
+
+  useEffect(() => {
+    closeRef.current = onClose
+  })
 
   useEffect(() => {
     const dialog = dialogRef.current
@@ -48,7 +51,9 @@ export default function Modal({ title, onClose, children }: Props) {
   }, [opener])
 
   return (
+    // biome-ignore lint/a11y/noStaticElementInteractions: clique no fundo é atalho de mouse; o equivalente por teclado é a tecla Esc (tratada acima)
     <div
+      role="presentation"
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
       onMouseDown={(e) => e.target === e.currentTarget && onClose()}
     >

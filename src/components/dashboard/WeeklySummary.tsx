@@ -35,7 +35,7 @@ export default function WeeklySummary({ habits, done, weeks }: Props) {
           const future = w.every((d) => d > todayKey)
           const p = calculateWeeklyProgress(habits, done, w)
           return (
-            <li key={i}>
+            <li key={w[0]}>
               <div className="mb-1 flex justify-between text-sm">
                 <span>Semana {i + 1}</span>
                 <span className={future ? 'text-muted' : ''}>{future ? 'Ainda não começou' : formatPercent(p)}</span>

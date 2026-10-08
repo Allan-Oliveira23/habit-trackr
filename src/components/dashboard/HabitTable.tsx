@@ -32,7 +32,7 @@ export default function HabitTable({ habits, days, done, onToggle, onEdit, onDel
           <tr>
             <td className="sticky left-0 z-10 bg-card" />
             {weeks.map((w, i) => (
-              <th key={i} scope="colgroup" colSpan={w.length} className="border-b border-line pb-1 text-xs font-medium text-muted">
+              <th key={dateKey(w[0])} scope="colgroup" colSpan={w.length} className="border-b border-line pb-1 text-xs font-medium text-muted">
                 Semana {i + 1}
               </th>
             ))}
@@ -61,17 +61,18 @@ export default function HabitTable({ habits, days, done, onToggle, onEdit, onDel
                       {h.name}
                       {!h.active && <span className="sr-only"> (inativo)</span>}
                     </span>
-                    <button aria-label={`Editar ${h.name}`} className={iconBtn} onClick={() => onEdit(h)}>
+                    <button type="button" aria-label={`Editar ${h.name}`} className={iconBtn} onClick={() => onEdit(h)}>
                       <Pencil size={14} />
                     </button>
                     <button
+                      type="button"
                       aria-label={`${h.active ? 'Desativar' : 'Ativar'} ${h.name}`}
                       className={iconBtn}
                       onClick={() => onToggleActive(h)}
                     >
                       <Power size={14} />
                     </button>
-                    <button aria-label={`Excluir ${h.name}`} className={iconBtn} onClick={() => onDelete(h)}>
+                    <button type="button" aria-label={`Excluir ${h.name}`} className={iconBtn} onClick={() => onDelete(h)}>
                       <Trash2 size={14} />
                     </button>
                   </div>

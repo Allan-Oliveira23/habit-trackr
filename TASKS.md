@@ -780,14 +780,14 @@ style: refine dashboard visual design
 
 # FASE 20 — Qualidade de código
 
-- [ ] remover código morto;
-- [ ] remover imports não usados;
-- [ ] remover componentes duplicados;
-- [ ] revisar nomes;
-- [ ] revisar tipos;
-- [ ] revisar funções de cálculo;
-- [ ] revisar efeitos;
-- [ ] revisar dependências.
+- [x] remover código morto;
+- [x] remover imports não usados;
+- [x] remover componentes duplicados;
+- [x] revisar nomes;
+- [x] revisar tipos;
+- [x] revisar funções de cálculo;
+- [x] revisar efeitos;
+- [x] revisar dependências.
 
 ---
 

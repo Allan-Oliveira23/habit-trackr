@@ -4,7 +4,10 @@ import './index.css'
 import App from './App'
 import { HabitProvider } from './context/HabitContext'
 
-createRoot(document.getElementById('root')!).render(
+const rootElement = document.getElementById('root')
+if (!rootElement) throw new Error('Elemento #root não encontrado')
+
+createRoot(rootElement).render(
   <StrictMode>
     <HabitProvider>
       <App />

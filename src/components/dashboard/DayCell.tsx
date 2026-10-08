@@ -23,6 +23,7 @@ export default function DayCell({ habitName, date, completed, today, future, onT
         </>
       }
     >
+    {/* biome-ignore lint/a11y/useSemanticElements: botão estilizado com role=checkbox/aria-checked (padrão ARIA); validado com axe e teclado */}
     <button
       type="button"
       role="checkbox"

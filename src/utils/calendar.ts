@@ -12,14 +12,18 @@ export const getDaysOfMonth = (year: number, month: number): Date[] => {
 }
 
 /** Semana do mês (0-based), começando na segunda-feira. */
-export const getWeekIndex = (d: Date): number => {
+const getWeekIndex = (d: Date): number => {
   const offset = (getDay(startOfMonth(d)) + 6) % 7
   return Math.floor((d.getDate() - 1 + offset) / 7)
 }
 
 export const getWeeks = (days: Date[]): Date[][] => {
   const weeks: Date[][] = []
-  for (const d of days) (weeks[getWeekIndex(d)] ??= []).push(d)
+  for (const d of days) {
+    const i = getWeekIndex(d)
+    if (!weeks[i]) weeks[i] = []
+    weeks[i].push(d)
+  }
   return weeks
 }
 

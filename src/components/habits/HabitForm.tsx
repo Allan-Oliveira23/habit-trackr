@@ -32,7 +32,7 @@ export default function HabitForm({ initial, onSubmit, onCancel }: Props) {
     <form onSubmit={submit} className="space-y-4">
       <label className="block text-sm">
         Nome
-        <input autoFocus className={`${field} mt-1`} value={name} onChange={(e) => setName(e.target.value)} />
+        <input className={`${field} mt-1`} value={name} onChange={(e) => setName(e.target.value)} />
       </label>
       <div className="grid grid-cols-2 gap-3">
         <label className="block text-sm">

@@ -29,11 +29,12 @@ export default function Dashboard() {
   const { openCreate, openEdit, openDelete, dialogs } = useHabitDialogs()
   const { days, dates, weeks, done } = useMonthData()
 
+  const todayKey = dateKey(new Date())
   const activeHabits = habits.filter((h) => h.active)
   const completed = calculateCompletedCount(habits, done, dates)
   const possible = calculatePossibleCount(habits, dates)
   const monthly = calculateMonthlyProgress(habits, done, dates)
-  const chartData = dates.map((d, i) => ({ day: i + 1, percentage: d > dateKey(new Date()) ? null : calculateDailyProgress(habits, done, d) }))
+  const chartData = dates.map((d, i) => ({ day: i + 1, percentage: d > todayKey ? null : calculateDailyProgress(habits, done, d) }))
 
   return (
     <div className="space-y-4">
@@ -73,7 +74,7 @@ export default function Dashboard() {
               <GoalSummary
                 goal={state.settings.dailyGoal}
                 maxGoal={activeHabits.length}
-                todayCompleted={dates.includes(dateKey(new Date())) ? calculateCompletedCount(habits, done, [dateKey(new Date())]) : null}
+                todayCompleted={dates.includes(todayKey) ? calculateCompletedCount(habits, done, [todayKey]) : null}
                 daysMet={state.settings.dailyGoal ? calculateDaysGoalMet(habits, done, dates, state.settings.dailyGoal) : 0}
                 totalDays={dates.length}
                 onChange={(goal) => dispatch({ type: 'SET_DAILY_GOAL', payload: goal })}
