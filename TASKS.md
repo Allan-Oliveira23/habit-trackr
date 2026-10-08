@@ -795,38 +795,38 @@ style: refine dashboard visual design
 
 ## Build
 
-- [ ] `npm run build`
+- [x] `npm run build`
 
 ## Lint
 
-- [ ] `npm run lint`
+- [x] `npm run lint`
 
 ## Funcional
 
-- [ ] criar hábito;
-- [ ] editar hábito;
-- [ ] excluir hábito;
-- [ ] ativar/desativar;
-- [ ] marcar célula;
-- [ ] desmarcar célula;
-- [ ] trocar mês;
-- [ ] voltar mês;
-- [ ] persistir após reload;
-- [ ] resetar dados.
+- [x] criar hábito;
+- [x] editar hábito;
+- [x] excluir hábito;
+- [x] ativar/desativar;
+- [x] marcar célula;
+- [x] desmarcar célula;
+- [x] trocar mês;
+- [x] voltar mês;
+- [x] persistir após reload;
+- [x] resetar dados.
 
 ## Calendário
 
-- [ ] mês com 28 dias;
-- [ ] fevereiro bissexto;
-- [ ] mês com 30 dias;
-- [ ] mês com 31 dias;
-- [ ] virada de ano.
+- [x] mês com 28 dias;
+- [x] fevereiro bissexto;
+- [x] mês com 30 dias;
+- [x] mês com 31 dias;
+- [x] virada de ano.
 
 ## Responsividade
 
-- [ ] desktop;
-- [ ] tablet;
-- [ ] mobile.
+- [x] desktop; _(Chromium headless 1366 px, sem overflow, sem erros de console)_
+- [x] tablet;
+- [x] mobile. _(Chromium 390 px com toque; Safari/iOS e aparelho físico não testados)_
 
 ---
 
