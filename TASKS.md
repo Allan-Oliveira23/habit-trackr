@@ -889,24 +889,24 @@ refactor: prepare persistence abstraction
 
 O MVP só pode ser considerado concluído quando todos estes itens estiverem funcionando:
 
-- [ ] Dashboard
-- [ ] CRUD de hábitos
-- [ ] Calendário mensal
-- [ ] Marcação diária
-- [ ] Navegação de meses
-- [ ] Progresso diário
-- [ ] Progresso semanal
-- [ ] Progresso mensal
-- [ ] Progresso por hábito
-- [ ] Gráfico
-- [ ] Metas básicas
-- [ ] localStorage
-- [ ] Responsividade
-- [ ] Acessibilidade básica
-- [ ] Build sem erros
-- [ ] Lint sem erros relevantes
-- [ ] Dados persistentes
-- [ ] Casos de calendário validados
+- [x] Dashboard
+- [x] CRUD de hábitos
+- [x] Calendário mensal
+- [x] Marcação diária
+- [x] Navegação de meses
+- [x] Progresso diário
+- [x] Progresso semanal
+- [x] Progresso mensal
+- [x] Progresso por hábito
+- [x] Gráfico
+- [x] Metas básicas
+- [x] localStorage
+- [x] Responsividade
+- [x] Acessibilidade básica
+- [x] Build sem erros
+- [x] Lint sem erros relevantes
+- [x] Dados persistentes
+- [x] Casos de calendário validados
 
 **Commit:**
 
