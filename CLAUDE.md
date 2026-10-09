@@ -4,7 +4,8 @@ Instruções permanentes para o Claude neste repositório.
 
 ## Arquivos de referência
 
-- `README.md` — especificação funcional e visual do produto.
+- `docs/ESPECIFICACAO.md` — especificação funcional e visual do produto.
+- `README.md` — documentação do projeto (instalação, comandos, arquitetura, modelo de dados, decisões).
 - `TASKS.md` — roteiro oficial de implementação (fonte da ordem de trabalho).
 
 ## Fluxo de trabalho
@@ -14,7 +15,7 @@ Instruções permanentes para o Claude neste repositório.
 - Antes de alterar arquivos: verificar o código existente e reutilizar componentes.
 - Depois de cada tarefa:
   1. verificar o resultado;
-  2. executar build/lint/testes disponíveis;
+  2. executar `npm run build`, `npm run lint` e `npm test`;
   3. corrigir apenas problemas relacionados à tarefa;
   4. atualizar o `TASKS.md` (`[x]` concluído, `[-]` parcial, `[!]` bloqueado);
   5. informar os arquivos alterados e o resultado da verificação;
@@ -29,6 +30,7 @@ Instruções permanentes para o Claude neste repositório.
 
 React + Vite + TypeScript, Tailwind CSS, Lucide React, Recharts, date-fns.
 Estado: React Context + `useReducer`. Persistência no MVP: `localStorage`.
+Qualidade: Vitest + jsdom (testes) e Biome (lint).
 
 ## Regras de código
 

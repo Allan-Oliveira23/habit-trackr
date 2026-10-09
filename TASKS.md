@@ -873,15 +873,15 @@ refactor: prepare persistence abstraction
 
 # FASE 24 — Documentação
 
-- [ ] atualizar README;
-- [ ] documentar instalação;
-- [ ] documentar comandos;
-- [ ] documentar stack;
-- [ ] documentar arquitetura;
-- [ ] documentar modelo de dados;
-- [ ] documentar decisões importantes;
-- [ ] confirmar `CLAUDE.md`;
-- [ ] confirmar `TASKS.md`.
+- [x] atualizar README;
+- [x] documentar instalação;
+- [x] documentar comandos;
+- [x] documentar stack;
+- [x] documentar arquitetura;
+- [x] documentar modelo de dados;
+- [x] documentar decisões importantes;
+- [x] confirmar `CLAUDE.md`;
+- [x] confirmar `TASKS.md`.
 
 ---
 
