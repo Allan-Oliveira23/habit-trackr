@@ -832,11 +832,11 @@ style: refine dashboard visual design
 
 # FASE 22 — Segurança do estado
 
-- [ ] testar localStorage inválido;
-- [ ] testar localStorage vazio;
-- [ ] testar campos ausentes;
-- [ ] testar dados antigos;
-- [ ] evitar crash da aplicação.
+- [x] testar localStorage inválido;
+- [x] testar localStorage vazio;
+- [x] testar campos ausentes;
+- [x] testar dados antigos;
+- [x] evitar crash da aplicação.
 
 ---
 

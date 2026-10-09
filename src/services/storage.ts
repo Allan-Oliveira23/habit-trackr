@@ -18,9 +18,17 @@ function normalizeHabit(v: unknown): Habit | null {
   }
 }
 
+/** Data real no formato YYYY-MM-DD (rejeita, por exemplo, 2026-02-30 e 2026-13-01). */
+function isValidDateKey(value: string): boolean {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false
+  const [y, m, d] = value.split('-').map(Number)
+  const date = new Date(y, m - 1, d)
+  return date.getFullYear() === y && date.getMonth() === m - 1 && date.getDate() === d
+}
+
 function normalizeCompletion(v: unknown): HabitCompletion | null {
   if (!isObject(v) || typeof v.habitId !== 'string') return null
-  if (typeof v.date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(v.date)) return null
+  if (typeof v.date !== 'string' || !isValidDateKey(v.date)) return null
   return { habitId: v.habitId, date: v.date, completed: v.completed === true }
 }
 
@@ -38,13 +46,21 @@ function parseStored(raw: string): PersistedData | null {
     if (isObject(parsed.settings) && typeof parsed.settings.dailyGoal === 'number') {
       settings.dailyGoal = parsed.settings.dailyGoal
     }
-    return {
-      habits: parsed.habits.map(normalizeHabit).filter((h): h is Habit => h !== null),
-      completions: (Array.isArray(parsed.completions) ? parsed.completions : [])
-        .map(normalizeCompletion)
-        .filter((c): c is HabitCompletion => c !== null),
-      settings,
+    // ids de hábito repetidos: mantém o primeiro
+    const byId = new Map<string, Habit>()
+    for (const raw of parsed.habits) {
+      const habit = normalizeHabit(raw)
+      if (habit && !byId.has(habit.id)) byId.set(habit.id, habit)
     }
+    const habits = [...byId.values()]
+    const ids = new Set(habits.map((h) => h.id))
+    // descarta conclusões órfãs (hábito inexistente) e repetidas (a última prevalece)
+    const unique = new Map<string, HabitCompletion>()
+    for (const raw of Array.isArray(parsed.completions) ? parsed.completions : []) {
+      const c = normalizeCompletion(raw)
+      if (c && ids.has(c.habitId)) unique.set(`${c.habitId}|${c.date}`, c)
+    }
+    return { habits, completions: [...unique.values()], settings }
   } catch {
     return null
   }
@@ -60,6 +76,24 @@ export function loadData(): LoadResult {
     return { data: null, corrupted: true }
   } catch {
     return { data: null, corrupted: false }
+  }
+}
+
+/** Conteúdo atual salvo, sem validação (para exportar antes de apagar). */
+export function readRawData(): string | null {
+  try {
+    return localStorage.getItem(KEY)
+  } catch {
+    return null
+  }
+}
+
+/** Remove os dados salvos (usado na recuperação de erros graves). */
+export function clearData(): void {
+  try {
+    localStorage.removeItem(KEY)
+  } catch {
+    // sem armazenamento: nada a limpar
   }
 }
 
