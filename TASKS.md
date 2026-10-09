@@ -858,10 +858,10 @@ API
 
 sem reescrever componentes.
 
-- [ ] componentes não dependem diretamente de localStorage;
-- [ ] storage está isolado em `services`;
-- [ ] domínio possui tipos claros;
-- [ ] cálculos são independentes da persistência.
+- [x] componentes não dependem diretamente de localStorage;
+- [x] storage está isolado em `services`;
+- [x] domínio possui tipos claros;
+- [x] cálculos são independentes da persistência.
 
 **Commit:**
 

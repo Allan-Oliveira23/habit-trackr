@@ -43,6 +43,9 @@ Estado: React Context + `useReducer`. Persistência no MVP: `localStorage`.
 7. O estado é a fonte de verdade; tabela, gráficos e resumos derivam dos mesmos dados.
 8. Persistência automática, sem botão "Salvar".
 9. Componentes não acessam `localStorage` diretamente; isso fica em `services/storage.ts`.
+   O restante da aplicação usa apenas a interface `persistence` (`services/persistence.ts`), nunca o módulo
+   concreto. Trocar `localStorage` por API = novo adapter + trocar o valor de `persistence`.
+   `src/architecture.test.ts` falha se essa regra for violada.
 10. Calendário gerado dinamicamente com `date-fns`; não implementar regras de data à mão.
 11. Percentuais nunca são armazenados como fonte de verdade.
 

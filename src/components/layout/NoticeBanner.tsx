@@ -1,6 +1,6 @@
 import { AlertTriangle } from 'lucide-react'
 import { useHabits } from '../../hooks/useHabits'
-import { getBackup } from '../../services/storage'
+import { persistence } from '../../services/persistence'
 import { downloadTextFile } from '../../utils/download'
 import Button from '../ui/Button'
 
@@ -18,7 +18,7 @@ export default function NoticeBanner() {
   const download = () => {
     const content =
       state.notice === 'corrupted'
-        ? (getBackup() ?? '')
+        ? (persistence.getBackup() ?? '')
         : JSON.stringify({ habits: state.habits, completions: state.completions, settings: state.settings }, null, 2)
     downloadTextFile('habit-tracker-backup.json', content)
   }

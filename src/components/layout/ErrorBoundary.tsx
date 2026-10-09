@@ -1,5 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react'
-import { clearData, readRawData } from '../../services/storage'
+import { persistence } from '../../services/persistence'
 import { downloadTextFile } from '../../utils/download'
 import Button from '../ui/Button'
 
@@ -23,11 +23,11 @@ export default class ErrorBoundary extends Component<Props, State> {
     console.error('Erro inesperado na aplicação:', error, info.componentStack)
   }
 
-  private downloadData = () => downloadTextFile('habit-tracker-backup.json', readRawData() ?? '')
+  private downloadData = () => downloadTextFile('habit-tracker-backup.json', persistence.exportRaw() ?? '')
 
   private resetAndReload = () => {
     if (window.confirm('Apagar todos os dados salvos neste navegador e recarregar? Esta ação não pode ser desfeita.')) {
-      clearData()
+      persistence.clear()
       window.location.reload()
     }
   }

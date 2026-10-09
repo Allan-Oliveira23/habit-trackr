@@ -1,5 +1,5 @@
 import { createSeedHabits } from '../data/seed'
-import { loadData } from '../services/storage'
+import { persistence } from '../services/persistence'
 import type { Habit, HabitState, Notice } from '../types/habit'
 
 export type HabitAction =
@@ -17,7 +17,7 @@ export type HabitAction =
 const currentPeriod = () => ({ year: new Date().getFullYear(), month: new Date().getMonth() })
 
 export const createInitialState = (): HabitState => {
-  const { data, corrupted } = loadData()
+  const { data, corrupted } = persistence.load()
   const base = data ?? { habits: createSeedHabits(), completions: [], settings: {} }
   return { ...base, notice: corrupted ? 'corrupted' : null, ...currentPeriod() }
 }
